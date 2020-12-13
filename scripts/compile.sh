@@ -32,7 +32,7 @@ cd / && cd flexpret/fpga
 rm -rf obj_dir
 
 # recompile the simulation
-verilator -Wall -Wno-lint -cc generated-src/Core.v --exe sim_main.cpp
+verilator -Wall -Wno-lint --stats --public -cc -CFLAGS -std=c++11 generated-src/4tf-16i-16d-ti/Core.v --exe sim_main.cpp
 
 # Build the exe
 cd obj_dir && make -f VCore.mk 
@@ -41,4 +41,4 @@ cd obj_dir && make -f VCore.mk
 cp -f ../../../lf-flexpret-scripts/c_test/$ispmfile $ispmfile
 cp -f ../../../lf-flexpret-scripts/c_test/$dspmfile $dspmfile
 
-./VCore
+./VCore $ispmfile
